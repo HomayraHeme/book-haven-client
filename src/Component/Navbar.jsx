@@ -1,5 +1,4 @@
 import React from "react";
-
 import logoImg from "../assets/Untitled_design-removebg-preview.png";
 import { Link, NavLink } from "react-router";
 import ThemeToggle from "../Theme/ThemeToggle";
@@ -8,24 +7,44 @@ const Navbar = () => {
     const navLinks = (
         <>
             <li>
-                <NavLink to="/" className={({ isActive }) =>
-                    isActive ? "underline  text-red-400" : "text-green-500"
-                }>Home</NavLink>
+                <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                        isActive ? "underline text-red-800" : "text-green-700"
+                    }
+                >
+                    Home
+                </NavLink>
             </li>
             <li>
-                <NavLink to="/all-books" className={({ isActive }) =>
-                    isActive ? "underline   text-red-400" : "text-green-500"
-                }>All Books</NavLink>
+                <NavLink
+                    to="/all-books"
+                    className={({ isActive }) =>
+                        isActive ? "underline text-red-800" : "text-green-700"
+                    }
+                >
+                    All Books
+                </NavLink>
             </li>
             <li>
-                <NavLink to="/add-book" className={({ isActive }) =>
-                    isActive ? "underline   text-red-400" : "text-green-500"
-                }>Add Books</NavLink>
+                <NavLink
+                    to="/add-book"
+                    className={({ isActive }) =>
+                        isActive ? "underline text-red-800" : "text-green-700"
+                    }
+                >
+                    Add Books
+                </NavLink>
             </li>
             <li>
-                <NavLink to="/myBooks" className={({ isActive }) =>
-                    isActive ? "underline   text-red-400" : "text-green-500"
-                }>My Books</NavLink>
+                <NavLink
+                    to="/myBooks"
+                    className={({ isActive }) =>
+                        isActive ? "underline text-red-800" : "text-green-700"
+                    }
+                >
+                    My Books
+                </NavLink>
             </li>
         </>
     );
@@ -54,7 +73,7 @@ const Navbar = () => {
                     </label>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow-lg bg-base-100 rounded-box w-52"
+                        className="menu menu-sm dropdown-content mt-3 p-2 shadow-lg bg-base-100 rounded-box w-52"
                     >
                         {navLinks}
                         <li className="p-2 mt-2">
@@ -66,9 +85,10 @@ const Navbar = () => {
                 <img className="w-12 h-12 mr-2" src={logoImg} alt="Logo" />
                 <Link
                     to="/"
-                    className="btn btn-ghost text-2xl font-extrabold  hover:bg-transparent"
+                    className="btn btn-ghost text-2xl font-extrabold hover:bg-transparent"
                 >
-                    <span className="text-green-600">BOOK-</span><span className="text-red-500">HAVEN</span>
+                    <span className="text-green-700">BOOK-</span>
+                    <span className="text-red-800">HAVEN</span>
                 </Link>
             </div>
 
@@ -86,18 +106,18 @@ const Navbar = () => {
                     <ThemeToggle />
                 </div>
 
-                {/* Login Button → Green */}
+                {/* Login Button → Deep Green */}
                 <Link
                     to="/login"
-                    className="btn bg-green-500 text-white hover:bg-green-600 btn-sm sm:btn-md font-bold"
+                    className="btn bg-green-700 text-white hover:bg-green-600 btn-sm sm:btn-md font-bold"
                 >
                     Login
                 </Link>
 
-                {/* Register Button → Red */}
+                {/* Register Button → Deep Burgundy */}
                 <Link
                     to="/registration"
-                    className="btn bg-red-500 text-white hover:bg-red-600 btn-sm sm:btn-md hidden md:flex font-bold"
+                    className="btn bg-red-800 text-white hover:bg-red-700 btn-sm sm:btn-md hidden md:flex font-bold"
                 >
                     Register
                 </Link>
