@@ -1,5 +1,5 @@
-/* Fade + Slide animation */
-.fade-slide {
+/* Fade+Slide animation */
+/* .fade-slide {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeSlide 1s ease forwards;
@@ -18,10 +18,10 @@
         opacity: 1;
         transform: translateY(0);
     }
-}
+} */
 
 /* Optional: Gradient background movement */
-@keyframes gradientX {
+/* @keyframes gradientX {
 
     0%,
     100% {
@@ -31,9 +31,28 @@
     50% {
         background-position: 100% 50%;
     }
-}
+} */
 
-section {
+/* section {
     background-size: 200% 200%;
     animation: gradientX 30s ease infinite;
+} */
+
+/* .banner {
+    position: relative;
+    background-image: url('/images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 100%;
 }
+
+.banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    /* overlay */
+/* }
+
+*/

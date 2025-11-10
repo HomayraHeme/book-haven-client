@@ -2,23 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { useTheme } from "../Theme/ThemeContext";
+import FindYourNextAdventure from "./FindYourNextAdventure";
+import BookOfTheWeek from "./BookOfTheWeek";
 
 const LatestBooks = () => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const { theme } = useTheme();
-
     const isDark = theme === "dark";
 
-    // Elegant color palette (same logic as Footer)
-    // const bgColor = isDark ? "bg-gray-900" : "bg-gray-50";
+    // Theme-based colors
+    // const sectionBg = isDark ? "bg-gray-900" : "bg-gray-50";
     const cardBg = isDark ? "bg-gray-800" : "bg-white";
     const textColor = isDark ? "text-gray-200" : "text-gray-800";
     const borderColor = isDark ? "border-gray-700" : "border-gray-200";
-    const hoverBorder = isDark ? "hover:border-green-500" : "hover:border-red-500";
-    const buttonGradient = isDark
-        ? "from-green-700 to-red-700"
-        : "from-red-700 to-green-700";
+    const hoverBorder = isDark ? "hover:border-amber-400" : "hover:border-amber-600";
+    const genreBg = isDark ? "bg-gray-700 text-amber-200" : "bg-amber-100 text-amber-900";
+
+    // Buttons match Banner style
+    const allBooksBtnGradient = isDark
+        ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
+        : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";
 
     useEffect(() => {
         axios.get("http://localhost:3000/latest-books")
@@ -34,20 +38,17 @@ const LatestBooks = () => {
 
     if (loading)
         return (
-            <p className="text-center mt-10 text-xl font-medium text-gray-600 animate-pulse">
+            <p className={`text-center mt-10 text-xl font-medium ${isDark ? "text-gray-300" : "text-gray-600"} animate-pulse`}>
                 Loading latest books...
             </p>
         );
 
     return (
-        <section
-            className={` px-4 sm:px-8 py-16 transition-colors duration-500`}
-        >
-            {/* Gradient Heading */}
-            <h2 className="text-4xl lg:text-5xl font-extrabold mb-12 text-center">
-                <span className="bg-gradient-to-r from-green-700 to-red-700 text-transparent bg-clip-text">
-                    New In Our Shelves
-                </span>
+        <section className={`px-4 sm:px-8 py-16 transition-colors duration-500  ${theme === "dark" ? "bg-[#1b1b1b]/90 border-[#3a3a3a]" : "bg-[#fdf6e3]/90 border-[#e0d9c3]"} 
+             rounded-2xl shadow-2xl`}>
+            {/* Heading */}
+            <h2 className={`text-4xl lg:text-5xl font-extrabold mb-12 text-center ${isDark ? "text-amber-100" : "text-amber-800"}`}>
+                New In Our Shelves
             </h2>
 
             <div className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -72,17 +73,17 @@ const LatestBooks = () => {
                         {/* Info */}
                         <div className="p-6 flex flex-col flex-1 justify-between">
                             <div>
-                                <h3 className="text-2xl font-extrabold mb-1 leading-tight">
+                                <h3 className={`text-2xl font-extrabold mb-1 leading-tight ${textColor}`}>
                                     {book.title}
                                 </h3>
-                                <p className="text-md mb-3 italic opacity-80">
+                                <p className={`text-md mb-3 italic opacity-80 ${textColor}`}>
                                     by {book.author}
                                 </p>
                             </div>
 
                             <div className="mt-4">
                                 {/* Genre */}
-                                <span className="inline-block bg-red-100 text-red-700 dark:bg-red-900 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+                                <span className={`inline-block ${genreBg} text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4`}>
                                     {book.genre}
                                 </span>
 
@@ -94,7 +95,7 @@ const LatestBooks = () => {
 
                                     {/* Button */}
                                     <button
-                                        className={`bg-gradient-to-r ${buttonGradient} text-white font-semibold py-2 px-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none`}
+                                        className={`${allBooksBtnGradient} font-semibold py-2 px-5   shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none btn btn-sm sm:btn-md`}
                                     >
                                         View Details
                                     </button>
@@ -118,8 +119,15 @@ const LatestBooks = () => {
                     }
                 }
             `}</style>
+            <div>
+                <FindYourNextAdventure></FindYourNextAdventure>
+            </div>
+            <div>
+                <BookOfTheWeek></BookOfTheWeek>
+            </div>
         </section>
+
     );
 };
 
-export default LatestBooks;     
+export default LatestBooks;

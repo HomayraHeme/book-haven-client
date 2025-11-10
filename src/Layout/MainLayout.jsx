@@ -5,10 +5,14 @@ import Footer from '../Component/Footer';
 
 const MainLayout = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
+        <div className='relative'>
+            <div>
+                <Navbar></Navbar>
+            </div>
+            <div><Outlet></Outlet></div>
+            <div className='-mt-90 relative z-10'>
+                <Footer></Footer>
+            </div>
         </div>
     );
 };

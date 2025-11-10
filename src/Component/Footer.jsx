@@ -1,7 +1,7 @@
 import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe, FaHandshake } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe, FaHandshake } from "react-icons/fa";
 import { useTheme } from "../Theme/ThemeContext";
-import logoImg from '../assets/Untitled_design-removebg-preview.png'
+import logoImg from '../assets/booklogo-removebg-preview.png';
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
@@ -10,59 +10,70 @@ const Footer = () => {
 
     const isDark = theme === "dark";
 
-    // Elegant color palette
-    const bgColor = isDark ? "bg-gray-900" : "bg-gray-100";
-    const textColor = isDark ? "text-gray-200" : "text-gray-700";
-    const accentGreen = "text-green-700"; // same for both
-    const accentRed = "text-red-800"; // same for both
-    const linkHoverColor = isDark ? "hover:text-green-500" : "hover:text-red-700";
-    const iconBgColor = isDark ? "bg-green-700 hover:bg-green-600" : "bg-red-800 hover:bg-red-700";
+    // --- Banner-inspired Color Palette ---
+    const brandPrimary = "text-amber-200"; // Amber/gold for highlights
+    const brandSecondary = "text-amber-100"; // Softer amber for secondary text
 
-    const peakShadow = isDark
-        ? '0 10px 15px -5px rgba(0,0,0,0.4), 0 -10px 15px -5px rgba(0,0,0,0.4)'
-        : '0 10px 15px -5px rgba(0,0,0,0.1), 0 -10px 15px -5px rgba(0,0,0,0.1)';
+    // Backgrounds
+    const bgColor = isDark ? "bg-[#1b1b1b]" : "bg-[#fdfaf5]";
+
+    // Text Colors
+    const textColor = isDark ? "text-amber-100" : "text-[#1b1b1b]";
+    const mutedTextColor = isDark ? "text-amber-200/70" : "text-[#1b1b1b]/70";
+
+    // Link Hover Colors
+    const linkHoverColor = isDark ? "hover:text-amber-300" : "hover:text-amber-600";
+
+    // Icon Background Colors
+    const iconBgColor1 = isDark ? "bg-[#0C1A3C] hover:bg-[#1A2A4D]" : "bg-amber-200 hover:bg-amber-300";
+    const iconBgColor2 = isDark ? "bg-[#1A2A4D] hover:bg-[#0C1A3C]" : "bg-amber-300 hover:bg-amber-400";
+
+    // Border for bottom part
+    const borderTopColor = isDark ? "border-gray-700" : "border-gray-300";
 
     return (
         <footer
             className={`relative ${bgColor} ${textColor} px-4 sm:px-8 py-12 sm:py-24 transition-colors duration-500`}
             style={{
                 clipPath: 'polygon(0% 0%, 50% 15%, 100% 0%, 100% 85%, 50% 100%, 0% 85%)',
-                boxShadow: peakShadow,
+                boxShadow: isDark
+                    ? '0 10px 15px -5px rgba(0,0,0,0.4), 0 -10px 15px -5px rgba(0,0,0,0.4)'
+                    : '0 10px 15px -5px rgba(0,0,0,0.1), 0 -10px 15px -5px rgba(0,0,0,0.1)',
             }}
         >
             <div className="w-full mx-auto flex flex-col md:grid lg:grid-cols-4 md:grid-cols-2 justify-between gap-10 md:gap-8 z-10 relative pb-4 max-w-[1200px] pt-24 md:pt-0">
 
                 <div className="flex flex-col items-center text-center gap-2 w-full md:col-span-1">
                     <div className="flex items-center justify-center">
-                        <img className="w-12 h-12" src={logoImg} alt="Logo" />
-                        <span className={`${accentGreen} font-extrabold text-2xl pl-6`}>BOOK-</span>
-                        <span className={`${accentRed} font-extrabold text-2xl ml-1`}>HAVEN</span>
+                        <img className="w-16 h-12" src={logoImg} alt="Logo" />
+                        <span className={` ${isDark ? "text-amber-100" : "text-amber-800"} font-extrabold text-2xl pl-6`}>BOOK-</span>
+                        <span className="text-[#c5a25e] font-extrabold text-2xl ml-1">HAVEN</span>
                     </div>
-                    <p className="text-sm mt-1 text-gray-400">
+                    <p className={`text-sm mt-1 ${mutedTextColor}`}>
                         Your online library & book haven.
                     </p>
                     <div className="flex items-start justify-center gap-2 text-sm mt-4">
-                        <FaMapMarkerAlt className={`mt-1 ${accentGreen}`} />
-                        <p>123 Literary Lane, Book City, BD 4567</p>
+                        <FaMapMarkerAlt className={`${brandPrimary} mt-1`} />
+                        <p className={mutedTextColor}>123 Literary Lane, Book City, BD 4567</p>
                     </div>
                 </div>
 
                 <div className="flex flex-col items-center text-center gap-3 w-full md:col-span-1">
-                    <h4 className="text-xl font-bold mb-2">Contact Info</h4>
+                    <h4 className={`${brandPrimary} text-xl font-bold mb-2`}>Contact Info</h4>
                     <div className="flex items-center justify-center gap-2 text-sm">
-                        <FaEnvelope className={accentGreen} />
+                        <FaEnvelope className={brandSecondary} />
                         <a href="mailto:contact@bookhaven.com" className={`${linkHoverColor} transition-colors`}>
                             contact@bookhaven.com
                         </a>
                     </div>
                     <div className="flex items-center justify-center gap-2 text-sm">
-                        <FaPhone className={accentGreen} />
+                        <FaPhone className={brandSecondary} />
                         <a href="tel:+8801700123456" className={`${linkHoverColor} transition-colors`}>
                             +880 1700-123456
                         </a>
                     </div>
                     <div className="flex items-center justify-center gap-2 text-sm">
-                        <FaGlobe className={accentGreen} />
+                        <FaGlobe className={brandSecondary} />
                         <a href="#" className={`${linkHoverColor} transition-colors`}>
                             www.bookhaven.com
                         </a>
@@ -70,23 +81,23 @@ const Footer = () => {
                 </div>
 
                 <div className="flex flex-col items-center text-center w-full md:col-span-1">
-                    <h4 className="text-xl font-bold mb-2">Follow Us</h4>
+                    <h4 className={`${brandPrimary} text-xl font-bold mb-2`}>Follow Us</h4>
                     <div className="flex gap-4 justify-center">
                         <a
                             href="#"
-                            className={`p-2 rounded-full ${iconBgColor} text-white transition-colors duration-300`}
+                            className={`p-2 rounded-full ${iconBgColor1} text-white transition-colors duration-300`}
                             aria-label="Facebook">
                             <FaFacebookF size={18} />
                         </a>
                         <a
                             href="#"
-                            className={`p-2 rounded-full ${iconBgColor} text-white transition-colors duration-300`}
+                            className={`p-2 rounded-full ${iconBgColor2} text-white transition-colors duration-300`}
                             aria-label="Twitter">
                             <FaXTwitter size={18} />
                         </a>
                         <a
                             href="#"
-                            className={`p-2 rounded-full ${iconBgColor} text-white transition-colors duration-300`}
+                            className={`p-2 rounded-full ${iconBgColor1} text-white transition-colors duration-300`}
                             aria-label="Instagram">
                             <FaInstagram size={18} />
                         </a>
@@ -94,22 +105,22 @@ const Footer = () => {
                 </div>
 
                 <div className="flex flex-col items-center text-center w-full md:col-span-1">
-                    <h4 className="text-xl font-bold mb-2">Legal</h4>
+                    <h4 className={`${brandPrimary} text-xl font-bold mb-2`}>Legal</h4>
                     <ul className="flex flex-col gap-2 items-center text-sm">
                         <li className="flex items-center justify-center gap-2">
-                            <FaHandshake className={accentGreen} />
+                            <FaHandshake className={brandPrimary} />
                             <a href="#" className={`${linkHoverColor} transition-colors`}>
                                 Privacy Policy
                             </a>
                         </li>
                         <li className="flex items-center justify-center gap-2">
-                            <FaHandshake className={accentGreen} />
+                            <FaHandshake className={brandPrimary} />
                             <a href="#" className={`${linkHoverColor} transition-colors`}>
                                 Terms of Service
                             </a>
                         </li>
                         <li className="flex items-center justify-center gap-2">
-                            <FaHandshake className={accentGreen} />
+                            <FaHandshake className={brandPrimary} />
                             <a href="#" className={`${linkHoverColor} transition-colors`}>
                                 Return Policy
                             </a>
@@ -118,8 +129,8 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-gray-700/50 text-center text-gray-400 text-sm max-w-[1200px] mx-auto">
-                &copy; {currentYear} Book-Haven. All rights reserved. <span className={accentRed}>Made with ❤️</span> by Book-Haven Team.
+            <div className={`mt-12 pt-8 border-t ${borderTopColor} text-center ${mutedTextColor} text-sm max-w-[1200px] mx-auto`}>
+                &copy; {currentYear} Book-Haven. All rights reserved. <span className={brandSecondary}>Made with ❤️</span> by Book-Haven Team.
             </div>
         </footer>
     );
