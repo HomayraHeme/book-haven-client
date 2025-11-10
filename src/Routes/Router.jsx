@@ -8,6 +8,7 @@ import AddBooks from "../Pages/AddBooks";
 import MyBooks from "../Pages/MyBooks";
 import UpdateBook from "../Pages/UpdateBook";
 import BookDetails from "../Pages/BookDetails";
+import PrvtRoutes from "./PrvtRoute";
 
 
 
@@ -35,20 +36,20 @@ const router = createBrowserRouter([
             },
             {
                 path: "/add-book",
-                element: <AddBooks></AddBooks>
+                element: <PrvtRoutes><AddBooks></AddBooks></PrvtRoutes>
             },
             {
                 path: "/myBooks",
-                element: <MyBooks></MyBooks>
+                element: <PrvtRoutes><MyBooks></MyBooks></PrvtRoutes>
             },
             {
                 path: "/update-book/:id",
-                element: <UpdateBook></UpdateBook>
+                element: <PrvtRoutes><UpdateBook></UpdateBook></PrvtRoutes>
 
             },
             {
                 path: "/book-details/:id",
-                element: <BookDetails></BookDetails>
+                element: <PrvtRoutes><BookDetails></BookDetails></PrvtRoutes>
             }
         ]
     }
