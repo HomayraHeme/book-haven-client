@@ -3,9 +3,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router";
 import { useTheme } from "../Theme/ThemeContext";
-import { FaStar, FaUserAlt, FaBookOpen, FaTags, FaCalendarAlt } from "react-icons/fa";
+import { FaStar, FaUserAlt, FaBookOpen, FaTags, FaCalendarAlt, FaPaperPlane } from "react-icons/fa";
 import { format } from "date-fns";
 import app from "../Firebase/Firebase.config";
+import Spinner from "../Component/Spinner";
 
 const BookDetails = () => {
     const { id } = useParams();
@@ -16,12 +17,14 @@ const BookDetails = () => {
     const [user, setUser] = useState(null);
     const [authChecked, setAuthChecked] = useState(false);
     const [book, setBook] = useState(null);
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     const auth = getAuth(app);
 
-    // Listen for Firebase Auth state changes
+    // Auth listener
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -30,9 +33,9 @@ const BookDetails = () => {
         return () => unsubscribe();
     }, [auth]);
 
-    // Fetch book details only after auth is ready
+    // Fetch Book + Comments
     useEffect(() => {
-        if (!authChecked) return; // wait for Firebase Auth to finish
+        if (!authChecked) return;
         if (!user) {
             navigate("/login");
             return;
@@ -45,21 +48,48 @@ const BookDetails = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setBook(res.data);
+
+                // Fetch comments
+                const commentRes = await axios.get(`http://localhost:3000/book-comments/${id}`);
+                setComments(commentRes.data);
             } catch (err) {
                 console.error(err);
-                if (err.response?.status === 401) {
-                    setError("Unauthorized. Please login again.");
-                    navigate("/login");
-                } else {
-                    setError("Failed to fetch book details.");
-                }
+                setError("Failed to fetch book details.");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchBookDetails();
+
+        // Polling for real-time updates
+        const interval = setInterval(fetchBookDetails, 5000);
+        return () => clearInterval(interval);
     }, [authChecked, user, id, navigate]);
+
+    // Add new comment
+    const handleAddComment = async () => {
+        if (!newComment.trim()) return;
+        try {
+            const token = await user.getIdToken();
+            await axios.post(
+                `http://localhost:3000/book-comments/${id}`,
+                {
+                    userName: user.displayName || "Anonymous",
+                    userPhoto: user.photoURL,
+                    comment: newComment,
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            setNewComment("");
+            const res = await axios.get(`http://localhost:3000/book-comments/${id}`);
+            setComments(res.data);
+        } catch (err) {
+            console.error("Error adding comment:", err);
+        }
+    };
 
     // Theme colors
     const cardColor = isDark ? "bg-[#262626]/70" : "bg-amber-200/30";
@@ -71,38 +101,30 @@ const BookDetails = () => {
 
     if (loading)
         return (
-            <div className="flex justify-center items-center min-h-screen text-2xl font-semibold text-[#c5a25e] animate-pulse pb-100">
-                Loading Book Details...
-            </div>
+            <Spinner></Spinner>
         );
     if (error)
         return (
-            <div className="flex justify-center items-center min-h-screen text-red-500 text-xl pb-100">
+            <div className="flex justify-center items-center min-h-screen text-red-500 text-xl">
                 {error}
-            </div>
-        );
-    if (!book)
-        return (
-            <div className="flex justify-center items-center min-h-screen text-red-500 text-xl pb-100">
-                Book not found 😔
             </div>
         );
 
     return (
         <div
-            className="min-h-screen flex justify-center items-center relative pb-100"
+            className="min-h-screen flex flex-col items-center relative py-16 pb-100"
             style={{
                 backgroundImage: `url(${book.coverImage || "https://via.placeholder.com/800x600"})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
         >
-            {/* Overlay for blur */}
+            {/* Overlay */}
             <div className="absolute inset-0 bg-black/10 backdrop-blur-sm"></div>
 
             {/* Content */}
-            <div className={`mt-10 relative max-w-4xl w-full rounded-2xl shadow-2xl p-8 sm:p-10 flex flex-col md:flex-row gap-10 ${cardColor} backdrop-blur-md`}>
-                {/* Book Image */}
+            <div className={`relative max-w-4xl w-full rounded-2xl shadow-2xl p-8 sm:p-10 flex flex-col md:flex-row gap-10 ${cardColor} backdrop-blur-md`}>
+                {/* Image */}
                 <div className="md:w-1/3 flex justify-center">
                     <img
                         src={book.coverImage || "https://via.placeholder.com/200x300?text=No+Cover"}
@@ -111,11 +133,9 @@ const BookDetails = () => {
                     />
                 </div>
 
-                {/* Book Info */}
+                {/* Info */}
                 <div className="md:w-2/3 p-6 rounded-2xl">
-                    <h2 className={`text-3xl sm:text-4xl font-extrabold mb-3 ${titleColor}`}>
-                        {book.title}
-                    </h2>
+                    <h2 className={`text-3xl sm:text-4xl font-extrabold mb-3 ${titleColor}`}>{book.title}</h2>
                     <p className={`flex items-center gap-2 mb-3 ${textColor}`}>
                         <FaUserAlt /> <span className="font-semibold">Author:</span> {book.author}
                     </p>
@@ -123,8 +143,7 @@ const BookDetails = () => {
                         <FaTags /> <span className="font-semibold">Genre:</span> {book.genre}
                     </p>
                     <p className={`flex items-center gap-2 mb-3 ${textColor}`}>
-                        <FaStar className="text-yellow-400" /> <span className="font-semibold">Rating:</span>{" "}
-                        {book.rating}
+                        <FaStar className="text-yellow-400" /> <span className="font-semibold">Rating:</span> {book.rating}
                     </p>
                     {book.created_at && (
                         <p className={`flex items-center gap-2 mb-3 ${textColor}`}>
@@ -140,6 +159,52 @@ const BookDetails = () => {
                         className={`${btnGradient} btn py-3 rounded-l font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center gap-2`}
                     >
                         <FaBookOpen /> Read Now
+                    </button>
+                </div>
+            </div>
+
+            {/* Comments Section */}
+            <div className={`mt-12 max-w-4xl w-full p-6 rounded-2xl  ${cardColor} backdrop-blur-sm shadow-lg`}>
+                <h3 className={`text-2xl font-bold mb-4 ${titleColor}`}>Comments</h3>
+
+                {/* Show Comments */}
+                <div className="space-y-4 mb-6">
+                    {comments.length > 0 ? (
+                        comments.map((c, index) => (
+                            <div
+                                key={index}
+                                className={`p-4 rounded-lg shadow-md ${isDark ? "bg-[#1b1b1b]/60" : "bg-[#faf6ef]/60"}`}
+                            >
+                                <div className="flex items-center gap-3 mb-2">
+                                    <img
+                                        src={c.userPhoto || "https://via.placeholder.com/40"}
+                                        alt={c.userName}
+                                        className="w-10 h-10 rounded-full border border-[#c5a25e]"
+                                    />
+                                    <h4 className={`font-semibold ${textColor}`}>{c.userName}</h4>
+                                </div>
+                                <p className={`text-sm ${textColor}`}>{c.comment}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p className={`${textColor}`}>No comments yet. Be the first!</p>
+                    )}
+                </div>
+
+                {/* Add Comment */}
+                <div className="flex items-center gap-3">
+                    <input
+                        type="text"
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                        placeholder="Write a comment..."
+                        className={`flex-1 p-3 rounded-lg border border-[#c5a25e] focus:outline-none ${isDark ? "bg-[#262626] text-[#f4e4b8]" : "bg-white text-[#1b1b1b]"}`}
+                    />
+                    <button
+                        onClick={handleAddComment}
+                        className={`${btnGradient} p-3 rounded-l flex items-center gap-2 transition-all hover:scale-105`}
+                    >
+                        <FaPaperPlane /> Send
                     </button>
                 </div>
             </div>
