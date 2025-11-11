@@ -102,7 +102,7 @@ const BookDetails = () => {
 
     // Theme colors
     const cardColor = isDark ? "bg-[#262626]/70" : "bg-amber-200/30";
-    const textColor = isDark ? "text-[#f4e4b8]" : "text-[#4a3b2d]";
+    const textColor = isDark ? "text-[#f4e4b8]" : "text-black";
     const titleColor = isDark ? "text-[#c5a25e]" : "text-amber-700";
     const btnGradient = isDark
         ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
@@ -213,7 +213,7 @@ const BookDetails = () => {
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Write a comment..."
-                        className={`flex-1 p-3 rounded-lg border border-[#c5a25e] focus:outline-none ${isDark ? "bg-[#262626] text-[#f4e4b8]" : "bg-white text-[#1b1b1b]"
+                        className={`flex-1 p-3 rounded-lg border border-[#c5a25e] focus:outline-none ${isDark ? "bg-[#262626] text-[#f4e4b8]" : "bg-white text-black"
                             }`}
                     />
                     <button

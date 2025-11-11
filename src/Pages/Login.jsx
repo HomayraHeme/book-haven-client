@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useTheme } from "../Theme/ThemeContext";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import loginImg from "../assets/logo.jpeg";
 import toast from "react-hot-toast";
@@ -10,17 +10,17 @@ const Login = () => {
     const { theme } = useTheme();
     const isDark = theme === "dark";
     const navigate = useNavigate();
-
     const { signIn, signInWithGoogle, setUser } = useContext(AuthContext);
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
-    // Theme styles
+
     const btnGradient = isDark
         ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
         : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";
-    const textColor = isDark ? "text-[#f4e4b8]" : "text-[#4a3b2d]";
+    const textColor = isDark ? "text-[#f4e4b8]" : "text-[#f4e4b8]";
     const inputBg = isDark ? "bg-[#1b1b1b] text-[#f4e4b8]" : "bg-[#fefcf5] text-[#4a3b2d]";
     const inputBorder = isDark ? "border-[#3a3a3a]" : "border-[#d4c19c]";
 
@@ -38,10 +38,15 @@ const Login = () => {
             setUser({
                 email: loggedUser.email,
                 displayName: loggedUser.displayName || "Anonymous User",
+                photoURL: loggedUser.photoURL,
             });
 
+            // ✅ Clear form fields
+            setEmail("");
+            setPassword("");
+
             toast.success("Login successful!");
-            navigate("/"); // redirect after login
+            navigate(from, { replace: true }); // or navigate("/") depending on your flow
         } catch (err) {
             let errorMessage = "Login failed!";
             if (err.code === "auth/user-not-found") {
@@ -59,6 +64,7 @@ const Login = () => {
         }
     };
 
+
     const handleGoogleLogin = async () => {
         try {
             const result = await signInWithGoogle();
@@ -70,11 +76,12 @@ const Login = () => {
             setUser({
                 email: loggedUser.email,
                 displayName: loggedUser.displayName || "Anonymous User",
+                photoURL: loggedUser.photoURL,
             });
-
             toast.success("Google login successful!");
-            navigate("/");
-        } catch (err) {
+            navigate(from, { replace: true });
+        }
+        catch (err) {
             toast.error("Google login failed. Please try again.");
             console.error(err);
         }
@@ -152,4 +159,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Login;    

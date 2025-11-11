@@ -68,7 +68,6 @@ const Navbar = () => {
         try {
             await logout();
             toast.success("Logged out successfully!");
-            window.location.href = "/"; // refresh to update navbar
         } catch (err) {
             toast.error("Logout failed! Try again.", err);
         }
@@ -81,7 +80,7 @@ const Navbar = () => {
                 : "bg-[#fdf6e3]/90 border-[#e0d9c3]"
                 } backdrop-blur-md text-[#d4c19c]`}
         >
-            {/* Navbar Start */}
+
             <div className="navbar-start flex items-center gap-2">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost text-[#f4e4b8] lg:hidden">

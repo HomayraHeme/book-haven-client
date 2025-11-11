@@ -57,11 +57,23 @@ const Registration = () => {
 
     const handleGoogleLogin = async () => {
         try {
-            await signInWithGoogle();
+            const result = await signInWithGoogle();
+            const loggedUser = result.user;
+
+            const token = await loggedUser.getIdToken();
+            localStorage.setItem("access-token", token);
+
+            setUser({
+                email: loggedUser.email,
+                displayName: loggedUser.displayName || "Anonymous User",
+                photoURL: loggedUser.photoURL,
+            });
             toast.success("Google login successful!");
-            navigate("/");
-        } catch (err) {
-            toast.error(err.message);
+            navigate('/');
+        }
+        catch (err) {
+            toast.error("Google login failed. Please try again.");
+            console.error(err);
         }
     };
 

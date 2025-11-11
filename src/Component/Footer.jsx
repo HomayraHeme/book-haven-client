@@ -26,7 +26,6 @@ const Footer = () => {
 
     // Icon Background Colors
     const iconBgColor1 = isDark ? "bg-[#0C1A3C] hover:bg-[#1A2A4D]" : "bg-amber-200 hover:bg-amber-300";
-    const iconBgColor2 = isDark ? "bg-[#1A2A4D] hover:bg-[#0C1A3C]" : "bg-amber-300 hover:bg-amber-400";
 
     // Border for bottom part
     const borderTopColor = isDark ? "border-gray-700" : "border-gray-300";
@@ -91,7 +90,7 @@ const Footer = () => {
                         </a>
                         <a
                             href="#"
-                            className={`p-2 rounded-full ${iconBgColor2} text-white transition-colors duration-300`}
+                            className={`p-2 rounded-full ${iconBgColor1} text-white transition-colors duration-300`}
                             aria-label="Twitter">
                             <FaXTwitter size={18} />
                         </a>
@@ -130,7 +129,7 @@ const Footer = () => {
             </div>
 
             <div className={`mt-12 pt-8 border-t ${borderTopColor} text-center ${mutedTextColor} text-sm max-w-[1200px] mx-auto`}>
-                &copy; {currentYear} Book-Haven. All rights reserved. <span className={brandSecondary}>Made with ❤️</span> by Book-Haven Team.
+                &copy; {currentYear} Book-Haven. All rights reserved.
             </div>
         </footer>
     );

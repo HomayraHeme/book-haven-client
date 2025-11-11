@@ -9,7 +9,7 @@ import { useTheme } from "../Theme/ThemeContext";
 const AddBooks = ({ onBookAdded }) => {
     const { theme } = useTheme();
     const isDark = theme === "dark";
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext); // ✅ include loading
     const navigate = useNavigate();
 
     const [bookData, setBookData] = useState({
@@ -40,10 +40,17 @@ const AddBooks = ({ onBookAdded }) => {
         }
 
         try {
+            // Convert rating to float
+            const ratingValue = parseFloat(bookData.rating) || 0;
+
             const res = await axios.post(
                 "http://localhost:3000/books",
-                { ...bookData },
-                { headers: { authorization: `Bearer ${localStorage.getItem("access-token")}` } }
+                { ...bookData, rating: ratingValue },
+                {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem("access-token")}`,
+                    },
+                }
             );
 
             if (res.data.insertedId) {
@@ -70,23 +77,106 @@ const AddBooks = ({ onBookAdded }) => {
         }
     };
 
+    // ✅ Show loading while auth is being fetched
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen text-amber-500 font-bold text-xl">
+                Loading...
+            </div>
+        );
+    }
+
+    // ✅ Redirect if user is not logged in
+    if (!user) {
+        toast.error("Please login to add a book!");
+        navigate("/login");
+        return null;
+    }
+
     return (
         <div
             className="min-h-screen flex items-center justify-center relative pb-100"
-            style={{ backgroundImage: `url(${bgImg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+            style={{
+                backgroundImage: `url(${bgImg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
         >
             <div className="absolute inset-0 bg-black/30"></div>
-            <div className={`mt-10 relative w-full max-w-2xl p-8 rounded-2xl shadow-xl z-10 ${isDark ? "bg-black/60 text-amber-100" : "bg-amber-100/20 text-[#1b1b1b]"} backdrop-blur-md`}>
+            <div
+                className={`mt-10 relative w-full max-w-2xl p-8 rounded-2xl shadow-xl z-10 ${isDark ? "bg-black/60 text-amber-100" : "bg-amber-100/20 text-[#1b1b1b]"
+                    } backdrop-blur-md`}
+            >
                 <h2 className="text-3xl font-bold text-center mb-6">Add a New Book</h2>
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <input type="text" name="title" placeholder="Book Title" className="input input-bordered w-full" value={bookData.title} onChange={handleChange} required />
-                    <input type="text" name="author" placeholder="Author Name" className="input input-bordered w-full" value={bookData.author} onChange={handleChange} required />
-                    <input type="text" name="genre" placeholder="Genre" className="input input-bordered w-full" value={bookData.genre} onChange={handleChange} required />
-                    <input type="number" name="rating" placeholder="Rating (1–5)" className="input input-bordered w-full" min="1" max="5" step="0.1" value={bookData.rating} onChange={handleChange} required />
-                    <input type="text" name="image" placeholder="Image URL" className="input input-bordered w-full md:col-span-2" value={bookData.image} onChange={handleChange} required />
-                    <input type="text" value={user?.displayName || "Unknown User"} readOnly className="input input-bordered w-full" />
-                    <input type="email" value={user?.email || "No Email Found"} readOnly className="input input-bordered w-full" />
-                    <textarea name="summary" placeholder="Short Description" className="textarea textarea-bordered w-full md:col-span-2 h-32" value={bookData.summary} onChange={handleChange} required></textarea>
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Book Title"
+                        className="input input-bordered w-full"
+                        value={bookData.title}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="author"
+                        placeholder="Author Name"
+                        className="input input-bordered w-full"
+                        value={bookData.author}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="genre"
+                        placeholder="Genre"
+                        className="input input-bordered w-full"
+                        value={bookData.genre}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="number"
+                        name="rating"
+                        placeholder="Rating (1–5)"
+                        className="input input-bordered w-full"
+                        min="1"
+                        max="5"
+                        step="0.1"
+                        value={bookData.rating}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="image"
+                        placeholder="Image URL"
+                        className="input input-bordered w-full md:col-span-2"
+                        value={bookData.image}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="text"
+                        value={user?.displayName || "Unknown User"}
+                        readOnly
+                        className="input input-bordered w-full"
+                    />
+                    <input
+                        type="email"
+                        value={user?.email || "No Email Found"}
+                        readOnly
+                        className="input input-bordered w-full"
+                    />
+                    <textarea
+                        name="summary"
+                        placeholder="Short Description"
+                        className="textarea textarea-bordered w-full md:col-span-2 h-32"
+                        value={bookData.summary}
+                        onChange={handleChange}
+                        required
+                    ></textarea>
                     <button type="submit" className={`${btnGradient} btn w-full md:col-span-2`}>
                         Add Book
                     </button>
