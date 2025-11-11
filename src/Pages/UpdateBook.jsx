@@ -4,7 +4,7 @@ import axios from "axios";
 import { useTheme } from "../Theme/ThemeContext";
 import { AuthContext } from "../Provider/AuthContext";
 import toast from "react-hot-toast";
-import loginImg from "../assets/logo.jpeg"; // Background image
+import loginImg from "../assets/logo.jpeg";
 
 const UpdateBook = () => {
     const location = useLocation();
@@ -56,7 +56,7 @@ const UpdateBook = () => {
 
         try {
             const res = await axios.patch(
-                `http://localhost:3000/books/${book._id}`,
+                `https://book-haven-api-server.vercel.app/books/${book._id}`,
                 {
                     ...bookData,
                     userEmail: user.email,
@@ -93,7 +93,7 @@ const UpdateBook = () => {
                 backgroundPosition: "center",
             }}
         >
-            {/* Dark overlay */}
+
             <div className="absolute inset-0 bg-black/30"></div>
 
             <div className={`mt-10 relative w-full max-w-2xl p-8 rounded-2xl shadow-xl backdrop-blur-lg z-10 ${isDark ? "bg-black/60" : "bg-amber-200/10"} 
@@ -152,7 +152,7 @@ const UpdateBook = () => {
                         required
                     />
 
-                    {/* Read-only user info */}
+
                     <input
                         type="text"
                         value={user?.displayName || "Unknown User"}

@@ -6,6 +6,7 @@ import { useTheme } from "../Theme/ThemeContext";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import Spinner from "../Component/Spinner";
 
 const MyBooks = () => {
     const { user } = useContext(AuthContext);
@@ -24,14 +25,14 @@ const MyBooks = () => {
         ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
         : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";
 
-    // Fetch logged-in user's books
+
     useEffect(() => {
         if (!user) return;
 
         const fetchMyBooks = async () => {
             setLoading(true);
             try {
-                const res = await axios.get("http://localhost:3000/myBooks", {
+                const res = await axios.get("https://book-haven-api-server.vercel.app/myBooks", {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("access-token")}`,
                     },
@@ -48,7 +49,7 @@ const MyBooks = () => {
         fetchMyBooks();
     }, [user]);
 
-    // Delete book
+
     const handleDelete = async (id) => {
         const result = await Swal.fire({
             title: "Are you sure?",
@@ -64,7 +65,7 @@ const MyBooks = () => {
             const loadingToast = toast.loading("Deleting...");
 
             try {
-                await axios.delete(`http://localhost:3000/books/${id}`, {
+                await axios.delete(`https://book-haven-api-server.vercel.app/books/${id}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("access-token")}`,
                     },
@@ -88,9 +89,7 @@ const MyBooks = () => {
 
     if (loading)
         return (
-            <p className="text-center mt-20 text-xl font-semibold text-[#c5a25e] animate-pulse">
-                Loading your books...
-            </p>
+            <Spinner></Spinner>
         );
 
     return (

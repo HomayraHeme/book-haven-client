@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
     const createUser = async (email, password) => {
         setLoading(true);
         const result = await createUserWithEmailAndPassword(auth, email, password);
-        setUser(result.user); // ✅ User context update
+        setUser(result.user);
         setLoading(false);
         return result;
     };

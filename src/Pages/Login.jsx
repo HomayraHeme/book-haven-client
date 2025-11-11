@@ -30,23 +30,23 @@ const Login = () => {
             const userCredential = await signIn(email, password);
             const loggedUser = userCredential.user;
 
-            // store Firebase ID token
+
             const token = await loggedUser.getIdToken();
             localStorage.setItem("access-token", token);
 
-            // update context
+
             setUser({
                 email: loggedUser.email,
                 displayName: loggedUser.displayName || "Anonymous User",
                 photoURL: loggedUser.photoURL,
             });
 
-            // ✅ Clear form fields
+
             setEmail("");
             setPassword("");
 
             toast.success("Login successful!");
-            navigate(from, { replace: true }); // or navigate("/") depending on your flow
+            navigate(from, { replace: true });
         } catch (err) {
             let errorMessage = "Login failed!";
             if (err.code === "auth/user-not-found") {

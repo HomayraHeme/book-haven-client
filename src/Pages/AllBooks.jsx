@@ -16,7 +16,7 @@ const AllBooks = ({ refreshTriggerProp = 0 }) => {
     const fetchBooks = async (order) => {
         try {
             setLoading(true);
-            const res = await axios.get(`http://localhost:3000/books?sort=${order}`);
+            const res = await axios.get(`https://book-haven-api-server.vercel.app/books?sort=${order}`);
             setBooks(res.data);
             setLoading(false);
         } catch (err) {
@@ -25,7 +25,7 @@ const AllBooks = ({ refreshTriggerProp = 0 }) => {
         }
     };
 
-    // Fetch books on sort change or new book added
+
     useEffect(() => {
         fetchBooks(sortOrder);
     }, [sortOrder, refreshTriggerProp]);

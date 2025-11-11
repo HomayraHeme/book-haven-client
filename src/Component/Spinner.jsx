@@ -10,11 +10,12 @@ const Spinner = () => {
                 alignItems: "center",
                 height: "100vh",
                 backgroundColor: "transparent",
-            }} className="pb-100"
+            }}
+            className="pb-100"
         >
             <InfinitySpin
                 width="150"
-                color="#4fa94d"
+                color="#b45309" // amber-800 hex code
             />
         </div>
     );

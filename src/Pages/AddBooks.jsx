@@ -9,7 +9,7 @@ import { useTheme } from "../Theme/ThemeContext";
 const AddBooks = ({ onBookAdded }) => {
     const { theme } = useTheme();
     const isDark = theme === "dark";
-    const { user, loading } = useContext(AuthContext); // ✅ include loading
+    const { user, loading } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [bookData, setBookData] = useState({
@@ -40,11 +40,11 @@ const AddBooks = ({ onBookAdded }) => {
         }
 
         try {
-            // Convert rating to float
+
             const ratingValue = parseFloat(bookData.rating) || 0;
 
             const res = await axios.post(
-                "http://localhost:3000/books",
+                "https://book-haven-api-server.vercel.app/books",
                 { ...bookData, rating: ratingValue },
                 {
                     headers: {
@@ -64,7 +64,7 @@ const AddBooks = ({ onBookAdded }) => {
                     image: "",
                 });
 
-                // Notify parent to refresh AllBooks
+
                 if (onBookAdded) onBookAdded();
 
                 navigate("/all-books");
@@ -77,7 +77,7 @@ const AddBooks = ({ onBookAdded }) => {
         }
     };
 
-    // ✅ Show loading while auth is being fetched
+
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen text-amber-500 font-bold text-xl">
@@ -86,7 +86,7 @@ const AddBooks = ({ onBookAdded }) => {
         );
     }
 
-    // ✅ Redirect if user is not logged in
+
     if (!user) {
         toast.error("Please login to add a book!");
         navigate("/login");

@@ -45,10 +45,15 @@ const Registration = () => {
 
         try {
             const result = await createUser(email, password);
-            console.log(result); // ✅ createUser এখন setUser করবে
-            await updateUser({ displayName: name, photoURL: photo }); // update Firebase profile
+            console.log(result);
+            await updateUser({ displayName: name, photoURL: photo });
+            setUser({
+                ...result.user,
+                displayName: name,
+                photoURL: photo,
+            });
 
-            // ✅ Form clear
+
             form.reset();
 
             toast.success("Account created successfully!");
@@ -95,10 +100,10 @@ const Registration = () => {
                 backgroundPosition: "center",
             }}
         >
-            {/* Dark overlay */}
+
             <div className="absolute inset-0 bg-black/60"></div>
 
-            {/* Signup form */}
+
             <div
                 className={`relative mt-10 z-10 w-full max-w-md p-10 rounded-2xl shadow-xl ${isDark ? "bg-black/60" : "bg-amber-200/10"
                     } backdrop-blur-md`}

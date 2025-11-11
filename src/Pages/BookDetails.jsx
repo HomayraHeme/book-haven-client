@@ -58,13 +58,13 @@ const BookDetails = () => {
         const fetchBookDetails = async () => {
             try {
                 const token = await user.getIdToken();
-                const res = await axios.get(`http://localhost:3000/book-details/${id}`, {
+                const res = await axios.get(`https://book-haven-api-server.vercel.app/book-details/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setBook(res.data);
 
 
-                const commentRes = await axios.get(`http://localhost:3000/book-comments/${id}`);
+                const commentRes = await axios.get(`https://book-haven-api-server.vercel.app/book-comments/${id}`);
                 setComments(commentRes.data);
             } catch (err) {
                 console.error(err);
@@ -87,7 +87,7 @@ const BookDetails = () => {
         try {
             const token = await user.getIdToken();
             await axios.post(
-                `http://localhost:3000/book-comments/${id}`,
+                `https://book-haven-api-server.vercel.app/book-comments/${id}`,
                 {
                     userName: user.displayName || "Anonymous",
                     userPhoto: user.photoURL,
@@ -98,7 +98,7 @@ const BookDetails = () => {
                 }
             );
             setNewComment("");
-            const res = await axios.get(`http://localhost:3000/book-comments/${id}`);
+            const res = await axios.get(`https://book-haven-api-server.vercel.app/book-comments/${id}`);
             setComments(res.data);
         } catch (err) {
             console.error("Error adding comment:", err);

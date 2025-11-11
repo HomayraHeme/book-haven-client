@@ -6,7 +6,7 @@ const ErrorPage = () => {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
 
-    // Button classes similar to your "View Details" button
+
     const btnClass = isDark
         ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
         : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";

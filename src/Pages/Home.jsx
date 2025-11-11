@@ -6,10 +6,10 @@ import LatestBooks from '../Component/LatestBooks';
 const Home = () => {
     return (
         <div className="relative pb-100">
-            <div> {/* Extra bottom padding for Banner */}
+            <div>
                 <Banner />
             </div>
-            <div className="-mt-100 relative z-10 w-8/12 mx-auto"> {/* Less negative margin for overlap */}
+            <div className="-mt-100 relative z-10 w-8/12 mx-auto">
                 <LatestBooks />
             </div>
 
