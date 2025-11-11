@@ -14,7 +14,7 @@ const BookOfTheWeek = () => {
         ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
         : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";
 
-    // Static book data
+
     const book = {
         title: "The Enchanted Forest",
         author: "J. R. Fantasy",
@@ -28,7 +28,7 @@ const BookOfTheWeek = () => {
     return (
         <section >
             <div className={`max-w-4xl flex flex-col md:flex-row gap-8 rounded-2xl shadow-2xl p-8 ${bgColor} backdrop-blur-md mt-10 rounded-2xl shadow-2xl`}>
-                {/* Book Image */}
+
                 <div className="md:w-1/3 flex justify-center">
                     <img
                         src={book.coverImage}
@@ -37,7 +37,6 @@ const BookOfTheWeek = () => {
                     />
                 </div>
 
-                {/* Book Info */}
                 <div className={`md:w-2/3 flex flex-col justify-between`}>
                     <div>
                         <h2 className={`text-3xl sm:text-4xl font-extrabold mb-4 ${titleColor}`}>
@@ -57,7 +56,7 @@ const BookOfTheWeek = () => {
                     </div>
 
                     <button
-                        className={`${btnGradient} btn py-3 rounded-lg font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2`}
+                        className={`${btnGradient} btn py-3 rounded font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2`}
                     >
                         <FaBookOpen /> Read Now
                     </button>

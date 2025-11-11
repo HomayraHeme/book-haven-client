@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "./ThemeContext";
-import { FiMoon, FiSun } from "react-icons/fi"; // react-icons ইনস্টল করা আবশ্যক
+import { FiMoon, FiSun } from "react-icons/fi";
 
 const ThemeToggle = () => {
     const { theme, toggleTheme } = useTheme();
@@ -11,8 +11,8 @@ const ThemeToggle = () => {
             className="btn btn-ghost btn-circle"
             title="Toggle Theme"
         >
-            {/* থিমের উপর ভিত্তি করে আইকন পরিবর্তন */}
-            {theme === "light" ? <FiMoon className="h-6 w-6" /> : <FiSun className="h-6 w-6" />}
+
+            {theme === "light" ? <FiMoon className="h-6 w-6 text-amber-800" /> : <FiSun className="h-6 w-6" />}
         </button>
     );
 };

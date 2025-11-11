@@ -11,6 +11,12 @@ const Navbar = () => {
     const isDark = theme === "dark";
     const { user, logout } = useContext(AuthContext);
 
+
+    const allBooksBtnGradient = isDark
+        ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
+        : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";
+
+
     const navLinks = (
         <>
             <li>
@@ -19,7 +25,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "text-[#c5a25e] underline"
-                            : "text-[#d4c19c] hover:text-[#f4e4b8]"
+                            : `${isDark ? "text-[#d4c19c] hover:text-[#f4e4b8]" : "text-amber-800 hover:text-[#f4e4b8]"}`
                     }
                 >
                     Home
@@ -31,7 +37,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "text-[#c5a25e] underline"
-                            : "text-[#d4c19c] hover:text-[#f4e4b8]"
+                            : `${isDark ? "text-[#d4c19c] hover:text-[#f4e4b8]" : "text-amber-800 hover:text-[#f4e4b8]"}`
                     }
                 >
                     All Books
@@ -43,7 +49,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "text-[#c5a25e] underline"
-                            : "text-[#d4c19c] hover:text-[#f4e4b8]"
+                            : `${isDark ? "text-[#d4c19c] hover:text-[#f4e4b8]" : "text-amber-800 hover:text-[#f4e4b8]"}`
                     }
                 >
                     Add Books
@@ -55,7 +61,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                         isActive
                             ? "text-[#c5a25e] underline"
-                            : "text-[#d4c19c] hover:text-[#f4e4b8]"
+                            : `${isDark ? "text-[#d4c19c] hover:text-[#f4e4b8]" : "text-amber-800 hover:text-[#f4e4b8]"}`
                     }
                 >
                     My Books
@@ -77,7 +83,7 @@ const Navbar = () => {
         <nav
             className={`navbar sticky top-0 z-50 px-4 sm:px-8 border-b ${isDark
                 ? "bg-[#1b1b1b]/90 border-[#3a3a3a]"
-                : "bg-[#fdf6e3]/90 border-[#e0d9c3]"
+                : "bg-[#e0d4b9]/90 border-[#e0d9c3]"
                 } backdrop-blur-md text-[#d4c19c]`}
         >
 
@@ -116,12 +122,12 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            {/* Navbar Center */}
+
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 font-medium space-x-4">{navLinks}</ul>
             </div>
 
-            {/* Navbar End */}
+
             <div className="navbar-end flex items-center gap-3 sm:gap-4">
                 <div className="hidden lg:block">
                     <ThemeToggle />
@@ -141,8 +147,8 @@ const Navbar = () => {
                         <Link
                             to="/registration"
                             className={`btn btn-sm sm:btn-md hidden md:flex font-bold ${isDark
-                                ? "bg-[#c5a25e] text-[#1b1b1b] hover:bg-[#d5b971]"
-                                : "bg-[#c5a25e] text-[#1b1b1b] hover:bg-[#e0c67a]"
+                                ? "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]"
+                                : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]"
                                 }`}
                         >
                             Register
@@ -160,10 +166,7 @@ const Navbar = () => {
                         )}
                         <button
                             onClick={handleLogout}
-                            className={`btn btn-sm sm:btn-md font-bold ${isDark
-                                ? "bg-[#16213e] text-[#f4e4b8] border border-[#c5a25e] hover:bg-[#1a2b52]"
-                                : "bg-[#c5a25e] text-[#1b1b1b] hover:bg-[#e0c67a]"
-                                }`}
+                            className={`${allBooksBtnGradient} font-semibold py-1 px-5   shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none btn btn-sm sm:btn-md`}
                         >
                             Logout
                         </button>

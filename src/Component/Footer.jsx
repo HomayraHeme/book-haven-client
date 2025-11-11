@@ -10,24 +10,15 @@ const Footer = () => {
 
     const isDark = theme === "dark";
 
-    // --- Banner-inspired Color Palette ---
-    const brandPrimary = "text-amber-200"; // Amber/gold for highlights
-    const brandSecondary = "text-amber-100"; // Softer amber for secondary text
 
-    // Backgrounds
-    const bgColor = isDark ? "bg-[#1b1b1b]" : "bg-[#fdfaf5]";
+    const brandPrimary = "text-amber-800";
+    const brandSecondary = "text-amber-100";
 
-    // Text Colors
-    const textColor = isDark ? "text-amber-100" : "text-[#1b1b1b]";
-    const mutedTextColor = isDark ? "text-amber-200/70" : "text-[#1b1b1b]/70";
 
-    // Link Hover Colors
-    const linkHoverColor = isDark ? "hover:text-amber-300" : "hover:text-amber-600";
-
-    // Icon Background Colors
-    const iconBgColor1 = isDark ? "bg-[#0C1A3C] hover:bg-[#1A2A4D]" : "bg-amber-200 hover:bg-amber-300";
-
-    // Border for bottom part
+    const bgColor = isDark ? "bg-[#1b1b1b]" : "bg-[#e0d4b9]";
+    const textColor = isDark ? "text-amber-100" : "text-amber-800";
+    const mutedTextColor = isDark ? "text-amber-200/70" : "text-amber-800";
+    const linkHoverColor = isDark ? "hover:text-amber-300" : "hover:text-amber-600"; const iconBgColor1 = isDark ? "bg-[#0C1A3C] hover:bg-[#1A2A4D]" : "bg-amber-800 hover:bg-amber-300";
     const borderTopColor = isDark ? "border-gray-700" : "border-gray-300";
 
     return (

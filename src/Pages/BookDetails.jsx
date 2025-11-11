@@ -218,12 +218,12 @@ const BookDetails = () => {
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Write a comment..."
-                        className={`flex-1 p-3 rounded-lg border border-[#c5a25e] focus:outline-none ${isDark ? "bg-[#262626] text-[#f4e4b8]" : "bg-white text-black"
+                        className={`flex-1 p-3 rounded border border-[#c5a25e] focus:outline-none ${isDark ? "bg-[#262626] text-[#f4e4b8]" : "bg-white text-black"
                             }`}
                     />
                     <button
                         onClick={handleAddComment}
-                        className={`${btnGradient} p-3 rounded-l flex items-center gap-2 transition-all hover:scale-105`}
+                        className={`${btnGradient} p-3 rounded flex items-center gap-2 transition-all hover:scale-105`}
                     >
                         <FaPaperPlane /> Send
                     </button>

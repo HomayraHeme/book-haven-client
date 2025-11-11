@@ -5,8 +5,6 @@ import UpdateBook from "../Pages/UpdateBook";
 
 const BooksPage = () => {
     const [refreshTrigger, setRefreshTrigger] = useState(0);
-
-    // Trigger AllBooks to fetch again and sort automatically
     const handleBookAdded = () => setRefreshTrigger(prev => prev + 1);
     const handleDataChange = () => setRefreshTrigger(prev => prev + 1);
 

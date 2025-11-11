@@ -19,9 +19,11 @@ const Banner = () => {
     const headingText = "text-amber-100";
     const paragraphText = "text-amber-200";
 
-    const allBooksBtn = theme === "dark"
+
+
+    const allBooksBtnGradient = theme === "dark"
         ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
-        : "bg-[#f4e4b8] border border-[#c5a25e] hover:bg-[#e0d9c3] text-[#1b1b1b]";
+        : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";
 
     const createBookBtn = theme === "dark"
         ? "bg-transparent border border-amber-200 hover:bg-amber-100 hover:text-[#0C1A3C] text-amber-100"
@@ -62,13 +64,13 @@ const Banner = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pb-100" data-aos="zoom-in" data-aos-delay="900">
                     <Link
                         to="/all-books"
-                        className={`${allBooksBtn} font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-300`}
+                        className={`${allBooksBtnGradient} font-semibold py-2 px-8   shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none btn btn-sm sm:btn-md`}
                     >
                         All Books
                     </Link>
                     <Link
                         to="/add-book"
-                        className={`${createBookBtn} font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-300`}
+                        className={`${createBookBtn} font-semibold py-2 px-6 rounded shadow-lg transition-all duration-300`}
                     >
                         Create Book
                     </Link>
