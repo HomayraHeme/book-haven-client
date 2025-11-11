@@ -66,28 +66,28 @@ const LatestBooks = () => {
                             <img
                                 src={book.coverImage}
                                 alt={book.title}
-                                className="w-full h-72 object-cover transition-transform duration-700 hover:scale-110"
+                                className="w-full h-40 object-cover transition-transform duration-700 hover:scale-110"
                             />
                         </div>
 
                         {/* Info */}
-                        <div className="p-6 flex flex-col flex-1 justify-between">
+                        <div className="px-6 pt-3 flex flex-col flex-1 justify-between">
                             <div>
                                 <h3 className={`text-2xl font-extrabold mb-1 leading-tight ${textColor}`}>
                                     {book.title}
                                 </h3>
-                                <p className={`text-md mb-3 italic opacity-80 ${textColor}`}>
+                                <p className={`text-md mb-1 italic opacity-80 ${textColor}`}>
                                     by {book.author}
                                 </p>
                             </div>
 
-                            <div className="mt-4">
+                            <div className="mt-1">
                                 {/* Genre */}
-                                <span className={`inline-block ${genreBg} text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4`}>
+                                <span className={`inline-block ${genreBg} text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider`}>
                                     {book.genre}
                                 </span>
 
-                                <div className="flex justify-between items-center pt-3 border-t border-gray-300/30 mt-4">
+                                <div className="flex justify-between items-center pt-3 border-t border-gray-300/30 mb-4 mt-2">
                                     {/* Rating */}
                                     <span className="text-lg font-bold text-yellow-500 flex items-center">
                                         <FaStar className="mr-1 text-2xl" /> {book.rating}
