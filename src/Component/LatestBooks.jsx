@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { useTheme } from "../Theme/ThemeContext";
 import FindYourNextAdventure from "./FindYourNextAdventure";
 import BookOfTheWeek from "./BookOfTheWeek";
+import { Link } from "react-router";
 
 const LatestBooks = () => {
     const [books, setBooks] = useState([]);
@@ -94,11 +95,11 @@ const LatestBooks = () => {
                                     </span>
 
                                     {/* Button */}
-                                    <button
+                                    <Link to={`/book-details/${book._id}`}><button
                                         className={`${allBooksBtnGradient} font-semibold py-2 px-5   shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:outline-none btn btn-sm sm:btn-md`}
                                     >
                                         View Details
-                                    </button>
+                                    </button></Link>
                                 </div>
                             </div>
                         </div>
