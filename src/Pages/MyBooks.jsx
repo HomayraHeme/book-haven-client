@@ -94,7 +94,7 @@ const MyBooks = () => {
         );
 
     return (
-        <section className={`${isDark ? "bg-[#1b1b1b]" : "bg-[#faf6ef]"} min-h-screen px-4 sm:px-8 py-16 pb-100`}>
+        <section className={`${isDark ? "bg-none" : "bg-[#faf6ef]"} min-h-screen px-4 sm:px-8 py-16 pb-100`}>
             <h2 className={`text-4xl font-extrabold mb-6 text-center ${titleColor}`}>My Books</h2>
 
             {books.length === 0 ? (

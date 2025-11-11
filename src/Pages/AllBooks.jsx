@@ -37,7 +37,7 @@ const AllBooks = ({ refreshTriggerProp = 0 }) => {
     }
 
     return (
-        <section className={`${isDark ? "bg-[#1b1b1b]" : "bg-[#faf6ef]"} min-h-screen px-4 sm:px-8 py-16 pb-100`}>
+        <section className={`${isDark ? "bg-none" : "bg-[#faf6ef]"} min-h-screen px-4 sm:px-8 py-16 pb-100`}>
             <h2 className={`text-4xl font-extrabold mb-6 text-center ${isDark ? "text-[#c5a25e]" : "text-amber-800"}`}>All Books Collection</h2>
 
             <div className="flex justify-center mb-10">
