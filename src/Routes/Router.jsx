@@ -9,6 +9,7 @@ import MyBooks from "../Pages/MyBooks";
 import UpdateBook from "../Pages/UpdateBook";
 import BookDetails from "../Pages/BookDetails";
 import PrvtRoutes from "./PrvtRoute";
+import ErrorPage from "../Pages/EorrorPage";
 
 
 
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: "/book-details/:id",
                 element: <PrvtRoutes><BookDetails></BookDetails></PrvtRoutes>
+            },
+            {
+                path: '/*',
+                Component: ErrorPage,
             }
         ]
     }

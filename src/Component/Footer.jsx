@@ -19,11 +19,11 @@ const Footer = () => {
     const textColor = isDark ? "text-amber-100" : "text-amber-800";
     const mutedTextColor = isDark ? "text-amber-200/70" : "text-amber-800";
     const linkHoverColor = isDark ? "hover:text-amber-300" : "hover:text-amber-600"; const iconBgColor1 = isDark ? "bg-[#0C1A3C] hover:bg-[#1A2A4D]" : "bg-amber-800 hover:bg-amber-300";
-    const borderTopColor = isDark ? "border-gray-700" : "border-gray-300";
+    const borderTopColor = isDark ? "border-gray-700" : "border-amber-600";
 
     return (
         <footer
-            className={`relative ${bgColor} ${textColor} px-4 sm:px-8 py-12 sm:py-24 transition-colors duration-500`}
+            className={`relative ${bgColor} ${textColor} px-4 sm:px-8 py-12 sm:py-24  transition-colors duration-500 pb-40 md:pb-24`}
             style={{
                 clipPath: 'polygon(0% 0%, 50% 15%, 100% 0%, 100% 85%, 50% 100%, 0% 85%)',
                 boxShadow: isDark

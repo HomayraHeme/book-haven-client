@@ -84,12 +84,12 @@ const Navbar = () => {
             className={`navbar sticky top-0 z-50 px-4 sm:px-8 border-b ${isDark
                 ? "bg-[#1b1b1b]/90 border-[#3a3a3a]"
                 : "bg-[#e0d4b9]/90 border-[#e0d9c3]"
-                } backdrop-blur-md text-[#d4c19c]`}
+                } backdrop-blur-md text-amber-800`}
         >
 
             <div className="navbar-start flex items-center gap-2">
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost text-[#f4e4b8] lg:hidden">
+                    <label tabIndex={0} className="btn btn-ghost text-shadow-amber-800 lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
