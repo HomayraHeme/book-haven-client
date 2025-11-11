@@ -8,6 +8,10 @@ import { format } from "date-fns";
 import app from "../Firebase/Firebase.config";
 import Spinner from "../Component/Spinner";
 
+// 🪄 AOS import
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const BookDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -23,6 +27,11 @@ const BookDetails = () => {
     const [error, setError] = useState("");
 
     const auth = getAuth(app);
+
+    // Initialize AOS
+    useEffect(() => {
+        AOS.init({ duration: 800, once: true });
+    }, []);
 
     // Auth listener
     useEffect(() => {
@@ -99,10 +108,7 @@ const BookDetails = () => {
         ? "bg-[#0C1A3C] border border-amber-200 hover:bg-[#1A2A4D] text-amber-100"
         : "bg-amber-200 border border-amber-400 hover:bg-amber-300 text-[#1b1b1b]";
 
-    if (loading)
-        return (
-            <Spinner></Spinner>
-        );
+    if (loading) return <Spinner />;
     if (error)
         return (
             <div className="flex justify-center items-center min-h-screen text-red-500 text-xl">
@@ -123,9 +129,12 @@ const BookDetails = () => {
             <div className="absolute inset-0 bg-black/10 backdrop-blur-sm"></div>
 
             {/* Content */}
-            <div className={`relative max-w-4xl w-full rounded-2xl shadow-2xl p-8 sm:p-10 flex flex-col md:flex-row gap-10 ${cardColor} backdrop-blur-md`}>
+            <div
+                data-aos="fade-up"
+                className={`relative max-w-4xl w-full rounded-2xl shadow-2xl p-8 sm:p-10 flex flex-col md:flex-row gap-10 ${cardColor} backdrop-blur-md`}
+            >
                 {/* Image */}
-                <div className="md:w-1/3 flex justify-center">
+                <div data-aos="zoom-in" className="md:w-1/3 flex justify-center">
                     <img
                         src={book.coverImage || "https://via.placeholder.com/200x300?text=No+Cover"}
                         alt={book.title}
@@ -134,8 +143,10 @@ const BookDetails = () => {
                 </div>
 
                 {/* Info */}
-                <div className="md:w-2/3 p-6 rounded-2xl">
-                    <h2 className={`text-3xl sm:text-4xl font-extrabold mb-3 ${titleColor}`}>{book.title}</h2>
+                <div data-aos="fade-left" className="md:w-2/3 p-6 rounded-2xl">
+                    <h2 className={`text-3xl sm:text-4xl font-extrabold mb-3 ${titleColor}`}>
+                        {book.title}
+                    </h2>
                     <p className={`flex items-center gap-2 mb-3 ${textColor}`}>
                         <FaUserAlt /> <span className="font-semibold">Author:</span> {book.author}
                     </p>
@@ -164,7 +175,10 @@ const BookDetails = () => {
             </div>
 
             {/* Comments Section */}
-            <div className={`mt-12 max-w-4xl w-full p-6 rounded-2xl  ${cardColor} backdrop-blur-sm shadow-lg`}>
+            <div
+                data-aos="fade-up"
+                className={`mt-12 max-w-4xl w-full p-6 rounded-2xl  ${cardColor} backdrop-blur-sm shadow-lg`}
+            >
                 <h3 className={`text-2xl font-bold mb-4 ${titleColor}`}>Comments</h3>
 
                 {/* Show Comments */}
@@ -173,6 +187,7 @@ const BookDetails = () => {
                         comments.map((c, index) => (
                             <div
                                 key={index}
+                                data-aos="fade-right"
                                 className={`p-4 rounded-lg shadow-md ${isDark ? "bg-[#1b1b1b]/60" : "bg-[#faf6ef]/60"}`}
                             >
                                 <div className="flex items-center gap-3 mb-2">
@@ -198,7 +213,8 @@ const BookDetails = () => {
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                         placeholder="Write a comment..."
-                        className={`flex-1 p-3 rounded-lg border border-[#c5a25e] focus:outline-none ${isDark ? "bg-[#262626] text-[#f4e4b8]" : "bg-white text-[#1b1b1b]"}`}
+                        className={`flex-1 p-3 rounded-lg border border-[#c5a25e] focus:outline-none ${isDark ? "bg-[#262626] text-[#f4e4b8]" : "bg-white text-[#1b1b1b]"
+                            }`}
                     />
                     <button
                         onClick={handleAddComment}
