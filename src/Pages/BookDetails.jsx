@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import app from "../Firebase/Firebase.config";
 import Spinner from "../Component/Spinner";
 
-// 🪄 AOS import
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -28,12 +28,17 @@ const BookDetails = () => {
 
     const auth = getAuth(app);
 
-    // Initialize AOS
+
     useEffect(() => {
         AOS.init({ duration: 800, once: true });
     }, []);
 
-    // Auth listener
+    useEffect(() => {
+        AOS.refresh();
+    }, [theme]);
+
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
@@ -42,7 +47,7 @@ const BookDetails = () => {
         return () => unsubscribe();
     }, [auth]);
 
-    // Fetch Book + Comments
+
     useEffect(() => {
         if (!authChecked) return;
         if (!user) {
@@ -58,7 +63,7 @@ const BookDetails = () => {
                 });
                 setBook(res.data);
 
-                // Fetch comments
+
                 const commentRes = await axios.get(`http://localhost:3000/book-comments/${id}`);
                 setComments(commentRes.data);
             } catch (err) {
@@ -71,12 +76,12 @@ const BookDetails = () => {
 
         fetchBookDetails();
 
-        // Polling for real-time updates
+
         const interval = setInterval(fetchBookDetails, 5000);
         return () => clearInterval(interval);
     }, [authChecked, user, id, navigate]);
 
-    // Add new comment
+
     const handleAddComment = async () => {
         if (!newComment.trim()) return;
         try {
@@ -100,7 +105,7 @@ const BookDetails = () => {
         }
     };
 
-    // Theme colors
+
     const cardColor = isDark ? "bg-[#262626]/70" : "bg-amber-200/30";
     const textColor = isDark ? "text-[#f4e4b8]" : "text-black";
     const titleColor = isDark ? "text-[#c5a25e]" : "text-amber-700";
@@ -125,15 +130,15 @@ const BookDetails = () => {
                 backgroundPosition: "center",
             }}
         >
-            {/* Overlay */}
+
             <div className="absolute inset-0 bg-black/10 backdrop-blur-sm"></div>
 
-            {/* Content */}
+
             <div
                 data-aos="fade-up"
                 className={`relative max-w-4xl w-full rounded-2xl shadow-2xl p-8 sm:p-10 flex flex-col md:flex-row gap-10 ${cardColor} backdrop-blur-md`}
             >
-                {/* Image */}
+
                 <div data-aos="zoom-in" className="md:w-1/3 flex justify-center">
                     <img
                         src={book.coverImage || "https://via.placeholder.com/200x300?text=No+Cover"}
@@ -142,7 +147,7 @@ const BookDetails = () => {
                     />
                 </div>
 
-                {/* Info */}
+
                 <div data-aos="fade-left" className="md:w-2/3 p-6 rounded-2xl">
                     <h2 className={`text-3xl sm:text-4xl font-extrabold mb-3 ${titleColor}`}>
                         {book.title}
@@ -174,14 +179,14 @@ const BookDetails = () => {
                 </div>
             </div>
 
-            {/* Comments Section */}
+
             <div
                 data-aos="fade-up"
                 className={`mt-12 max-w-4xl w-full p-6 rounded-2xl  ${cardColor} backdrop-blur-sm shadow-lg`}
             >
                 <h3 className={`text-2xl font-bold mb-4 ${titleColor}`}>Comments</h3>
 
-                {/* Show Comments */}
+
                 <div className="space-y-4 mb-6">
                     {comments.length > 0 ? (
                         comments.map((c, index) => (
@@ -206,7 +211,7 @@ const BookDetails = () => {
                     )}
                 </div>
 
-                {/* Add Comment */}
+
                 <div className="flex items-center gap-3">
                     <input
                         type="text"

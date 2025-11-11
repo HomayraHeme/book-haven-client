@@ -154,7 +154,7 @@ const Navbar = () => {
                             <img
                                 src={user.photoURL}
                                 alt={user.displayName}
-                                className="w-10 h-10 rounded-full border border-amber-500"
+                                className="w-10 h-10 rounded-full border-2 border-amber-500"
                                 title={user.displayName}
                             />
                         )}
