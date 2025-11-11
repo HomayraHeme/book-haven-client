@@ -11,12 +11,14 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const createUser = (email, password,) => {
+    const createUser = async (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
-
-
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        setUser(result.user); // ✅ User context update
+        setLoading(false);
+        return result;
     };
+
     const signInWithGoogle = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)

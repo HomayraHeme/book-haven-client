@@ -45,8 +45,12 @@ const Registration = () => {
 
         try {
             const result = await createUser(email, password);
-            await updateUser({ displayName: name, photoURL: photo });
-            setUser({ ...result.user, displayName: name, photoURL: photo });
+            console.log(result); // ✅ createUser এখন setUser করবে
+            await updateUser({ displayName: name, photoURL: photo }); // update Firebase profile
+
+            // ✅ Form clear
+            form.reset();
+
             toast.success("Account created successfully!");
             navigate("/");
         } catch (err) {
