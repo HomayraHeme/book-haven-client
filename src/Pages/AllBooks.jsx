@@ -3,6 +3,7 @@ import axios from "axios";
 import { useTheme } from "../Theme/ThemeContext";
 import { Link } from "react-router";
 import { FaBookOpen, FaStar } from "react-icons/fa";
+import Spinner from "../Component/Spinner";
 
 const AllBooks = ({ refreshTriggerProp = 0 }) => {
     const [books, setBooks] = useState([]);
@@ -32,7 +33,7 @@ const AllBooks = ({ refreshTriggerProp = 0 }) => {
     const handleSortChange = (e) => setSortOrder(e.target.value);
 
     if (loading) {
-        return <p className="text-center mt-10 text-xl font-semibold text-[#c5a25e] animate-pulse">Loading all books...</p>;
+        return <Spinner></Spinner>
     }
 
     return (

@@ -4,6 +4,7 @@ import { Navigate, useLocation } from 'react-router';
 import { AuthContext } from '../Provider/AuthContext';
 import Spinner from '../Component/Spinner';
 
+
 const PrvtRoutes = ({ children }) => {
     const { user, loading } = use(AuthContext);
 
@@ -11,7 +12,9 @@ const PrvtRoutes = ({ children }) => {
     // console.log(location);
 
     if (loading) {
-        return <Spinner></Spinner>
+        return <div>
+            <Spinner ></Spinner>
+        </div>
     }
     if (user) {
         return children;
