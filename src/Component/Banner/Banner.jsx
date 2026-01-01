@@ -30,7 +30,7 @@ const Banner = () => {
         : "bg-transparent border border-[#c5a25e] text-amber-100 hover:bg-[#c5a25e] hover:text-[#1b1b1b] text-[#1b1b1b]";
 
     return (
-        <section className="relative h-[900px] w-full flex items-center justify-center overflow-hidden">
+        <section className="relative h-[800px] w-full flex items-center justify-center overflow-hidden pt-15">
             <img
                 src={bannerImg}
                 alt="Library Banner"

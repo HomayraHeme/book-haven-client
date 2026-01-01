@@ -70,7 +70,7 @@ const UpdateBook = () => {
 
             if (res.data.modifiedCount > 0) {
                 toast.success("Book updated successfully!");
-                navigate("/myBooks");
+                navigate("/dashboard/my-books");
             } else {
                 toast.error("Nothing was updated!");
             }

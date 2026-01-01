@@ -15,7 +15,7 @@ const Spinner = () => {
         >
             <InfinitySpin
                 width="150"
-                color="#b45309" // amber-800 hex code
+                color="#b45309" 
             />
         </div>
     );

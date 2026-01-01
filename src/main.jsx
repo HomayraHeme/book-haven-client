@@ -16,7 +16,7 @@ import { Toaster } from 'react-hot-toast';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider> <ThemeProvider> <RouterProvider router={router} /> <Toaster
-      position="top-center" // টোস্ট কোথায় দেখাবে (ঐচ্ছিক)
+      position="top-center"
       reverseOrder={false}
     /></ThemeProvider></AuthProvider>
   </StrictMode>,

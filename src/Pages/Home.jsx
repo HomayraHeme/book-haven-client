@@ -9,7 +9,7 @@ const Home = () => {
             <div>
                 <Banner />
             </div>
-            <div className="-mt-100 relative z-10 w-8/12 mx-auto">
+            <div className="-mt-90 relative z-10 w-11/12 mx-auto">
                 <LatestBooks />
             </div>
 

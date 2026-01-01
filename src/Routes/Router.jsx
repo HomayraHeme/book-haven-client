@@ -10,6 +10,11 @@ import UpdateBook from "../Pages/UpdateBook";
 import BookDetails from "../Pages/BookDetails";
 import PrvtRoutes from "./PrvtRoute";
 import ErrorPage from "../Pages/EorrorPage";
+import HowItWorks from "../Pages/HowItWorks";
+import Profile from "../Pages/MyProfile";
+import MyProfile from "../Pages/MyProfile";
+import DashboardLayout from "../Pages/Dashboard/DashboardLayout";
+import Analytics from "../Pages/Dashboard/Analytics";
 
 
 
@@ -35,26 +40,50 @@ const router = createBrowserRouter([
                 path: "/registration",
                 Component: Registration
             },
-            {
-                path: "/add-book",
-                element: <PrvtRoutes><AddBooks></AddBooks></PrvtRoutes>
-            },
-            {
-                path: "/myBooks",
-                element: <PrvtRoutes><MyBooks></MyBooks></PrvtRoutes>
-            },
-            {
-                path: "/update-book/:id",
-                element: <PrvtRoutes><UpdateBook></UpdateBook></PrvtRoutes>
-
-            },
+           
             {
                 path: "/book-details/:id",
-                element: <PrvtRoutes><BookDetails></BookDetails></PrvtRoutes>
+                element:  <BookDetails></BookDetails> 
             },
             {
                 path: '/*',
                 Component: ErrorPage,
+            },
+            {
+                path: '/howItWorks',
+                Component: HowItWorks
+            },
+            {
+                path: '/profile',
+                Component: MyProfile
+            },
+             {
+                path: "update-book/:id",
+                element: <PrvtRoutes><UpdateBook></UpdateBook></PrvtRoutes>
+
+            },
+        ]
+    },
+    {
+         path: '/dashboard',
+        element: <PrvtRoutes><DashboardLayout></DashboardLayout></PrvtRoutes>,
+        children: [
+              {
+                path: "add-books",
+                element: <PrvtRoutes><AddBooks></AddBooks></PrvtRoutes>
+            },
+            {
+                path: "my-books",
+                element: <PrvtRoutes><MyBooks></MyBooks></PrvtRoutes>
+            },
+           
+            {
+                path: "profile",
+                element: <MyProfile></MyProfile>
+            },
+            {
+                path: "analytics",
+                element: <PrvtRoutes> <Analytics></Analytics> </PrvtRoutes>
             }
         ]
     }

@@ -95,7 +95,7 @@ const AddBooks = ({ onBookAdded }) => {
 
     return (
         <div
-            className="min-h-screen flex items-center justify-center relative pb-100"
+            className="min-h-screen flex items-center justify-center relative pt-20"
             style={{
                 backgroundImage: `url(${bgImg})`,
                 backgroundSize: "cover",

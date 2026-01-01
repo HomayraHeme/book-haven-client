@@ -6,6 +6,7 @@ import FindYourNextAdventure from "./FindYourNextAdventure";
 import BookOfTheWeek from "./BookOfTheWeek";
 import { Link } from "react-router";
 import Spinner from "./Spinner";
+import ExtraSections from "./ExtraSections";
 
 const LatestBooks = () => {
     const [books, setBooks] = useState([]);
@@ -42,14 +43,14 @@ const LatestBooks = () => {
         );
 
     return (
-        <section className={`px-4 sm:px-8 py-16 transition-colors duration-500  ${theme === "dark" ? "bg-[#1b1b1b]/90 border-[#3a3a3a]" : "bg-[#fdf6e3]/90 border-[#e0d9c3]"} 
+        <section className={`px-4 sm:px-8 py-12 transition-colors duration-500  ${theme === "dark" ? "bg-[#1b1b1b]/90 border-[#3a3a3a]" : "bg-[#fdf6e3]/90 border-[#e0d9c3]"} 
              rounded-2xl shadow-2xl`}>
 
             <h2 className={`text-4xl lg:text-5xl font-extrabold mb-12 text-center ${isDark ? "text-amber-100" : "text-amber-800"}`}>
                 New In Our Shelves
             </h2>
 
-            <div className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {books.map((book, index) => (
                     <div
                         key={book._id}
@@ -123,6 +124,8 @@ const LatestBooks = () => {
             <div>
                 <BookOfTheWeek></BookOfTheWeek>
             </div>
+            <ExtraSections></ExtraSections>
+             
         </section>
 
     );

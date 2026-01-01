@@ -27,7 +27,7 @@ const BookOfTheWeek = () => {
 
     return (
         <section >
-            <div className={`max-w-4xl flex flex-col md:flex-row gap-8 rounded-2xl shadow-2xl p-8 ${bgColor} backdrop-blur-md mt-10 rounded-2xl shadow-2xl`}>
+            <div className={`max-w-6xl flex flex-col md:flex-row gap-8 rounded-2xl shadow-2xl p-8 ${bgColor} backdrop-blur-md mt-10 rounded-2xl shadow-2xl mx-auto`}>
 
                 <div className="md:w-1/3 flex justify-center">
                     <img
