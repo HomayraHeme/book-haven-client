@@ -74,19 +74,19 @@ const Footer = () => {
                     <h4 className={`${brandPrimary} text-xl font-bold mb-2`}>Follow Us</h4>
                     <div className="flex gap-4 justify-center">
                         <a
-                            href="#"
+                            href="https://web.facebook.com/home.php"
                             className={`p-2 rounded-full ${iconBgColor1} text-white transition-colors duration-300`}
                             aria-label="Facebook">
                             <FaFacebookF size={18} />
                         </a>
                         <a
-                            href="#"
+                            href="https://x.com/"
                             className={`p-2 rounded-full ${iconBgColor1} text-white transition-colors duration-300`}
                             aria-label="Twitter">
                             <FaXTwitter size={18} />
                         </a>
                         <a
-                            href="#"
+                            href="https://www.instagram.com/"
                             className={`p-2 rounded-full ${iconBgColor1} text-white transition-colors duration-300`}
                             aria-label="Instagram">
                             <FaInstagram size={18} />
@@ -95,24 +95,24 @@ const Footer = () => {
                 </div>
 
                 <div className="flex flex-col items-center text-center w-full md:col-span-1">
-                    <h4 className={`${brandPrimary} text-xl font-bold mb-2`}>Legal</h4>
+                    <h4 className={`${brandPrimary} text-xl font-bold mb-2`}>Summery</h4>
                     <ul className="flex flex-col gap-2 items-center text-sm">
                         <li className="flex items-center justify-center gap-2">
                             <FaHandshake className={brandPrimary} />
-                            <a href="#" className={`${linkHoverColor} transition-colors`}>
-                                Privacy Policy
+                            <a href="/" className={`${linkHoverColor} transition-colors`}>
+                                Home
                             </a>
                         </li>
                         <li className="flex items-center justify-center gap-2">
                             <FaHandshake className={brandPrimary} />
-                            <a href="#" className={`${linkHoverColor} transition-colors`}>
-                                Terms of Service
+                            <a href="/all-books" className={`${linkHoverColor} transition-colors`}>
+                                All Books
                             </a>
                         </li>
                         <li className="flex items-center justify-center gap-2">
                             <FaHandshake className={brandPrimary} />
-                            <a href="#" className={`${linkHoverColor} transition-colors`}>
-                                Return Policy
+                            <a href="/howItWorks" className={`${linkHoverColor} transition-colors`}>
+                                How It Works
                             </a>
                         </li>
                     </ul>
